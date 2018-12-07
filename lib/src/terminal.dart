@@ -1,11 +1,23 @@
 import 'dart:io';
+import 'package:prompter_ab/src/option.dart';
+
 class Terminal {
+  const Terminal();
+
   void printPrompt(String prompt) {
     stdout.writeln(prompt);
   }
 
+  void printOptions(List<Option> options) {
+    options.asMap().forEach((index, option) {
+      stdout.writeln('[$index] - ${option.label}');
+    });
+
+    stdout.writeln('Enter a choice:\n');
+    stdout.write('>');
+  }
+
   String collectInput() => stdin.readLineSync();
-  
 
   void clearScreen() {
     if (Platform.isWindows) {
